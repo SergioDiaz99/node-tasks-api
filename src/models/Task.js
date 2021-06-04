@@ -1,23 +1,27 @@
-import {Schema, model} from 'mongoose'
+import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
-const taskSchema = new Schema({
+const taskSchema = new Schema(
+  {
     tittle: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
-        trim: true
-    }, 
-    done: {
-        type: Boolean,
-        default: false
+      type: String,
+      trim: true,
     },
-    },  
-    {
-        versionKey: false,
-        timestamps: true
-    });
+    done: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
 
-export default model('Task',taskSchema)
+taskSchema.plugin(mongoosePaginate);
+export default model("Task", taskSchema);
